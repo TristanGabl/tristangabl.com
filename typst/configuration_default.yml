@@ -30,6 +30,7 @@ education:
           - 'Advanced Numerical Methods'
           - 'Recursive Estimation'
           - 'Model Predictive Control'
+          - 'Large-Scale AI Engineering'
       points: []
 
     - institution: 'ETH Zürich'

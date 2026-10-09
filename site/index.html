@@ -5,11 +5,35 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Tristan Gabl</title>
 <style>
-  html, body { margin: 0; height: 100%; background: #525659; }
-  iframe { border: 0; width: 100%; height: 100%; display: block; }
+  html, body { margin: 0; background: #525659; }
+  #pages { display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 16px; }
+  canvas { width: 100%; max-width: 900px; height: auto; background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,.4); }
+  #download { color: #fff; font: 16px system-ui, sans-serif; text-align: center; padding: 0 16px 24px; }
+  #download a { color: #fff; }
 </style>
 </head>
 <body>
-<iframe src="default/cv_tristan_gabl.pdf" title="CV of Tristan Gabl"></iframe>
+<div id="pages"></div>
+<p id="download"><a href="default/cv_tristan_gabl.pdf">Download CV (PDF)</a></p>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>
+  const url = "default/cv_tristan_gabl.pdf";
+  pdfjsLib.GlobalWorkerOptions.workerSrc =
+    "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+
+  pdfjsLib.getDocument(url).promise.then(async (pdf) => {
+    const container = document.getElementById("pages");
+    const scale = 2 * (window.devicePixelRatio || 1);
+    for (let n = 1; n <= pdf.numPages; n++) {
+      const page = await pdf.getPage(n);
+      const viewport = page.getViewport({ scale });
+      const canvas = document.createElement("canvas");
+      canvas.width = viewport.width;
+      canvas.height = viewport.height;
+      container.appendChild(canvas);
+      await page.render({ canvasContext: canvas.getContext("2d"), viewport }).promise;
+    }
+  });
+</script>
 </body>
 </html>

@@ -24,7 +24,7 @@ typst compile default.typ ../default/cv_tristan_gabl.pdf
 ## Deploy
 
 `.github/workflows` builds both variants on push and deploys to GitHub Pages (`gh-pages`) as
-`short/cv_tristan_gabl.pdf` and `default/cv_tristan_gabl.pdf`. `site/index.html` is copied to the site root and embeds the short CV. Commits go directly to `main`.
+`short/cv_tristan_gabl.pdf` and `default/cv_tristan_gabl.pdf`. `site/index.html` (embeds the short CV) and `site/CNAME` (custom domain `tristangabl.com`) are copied to the site root. Commits go directly to `main`.
 
 ## Writing CV bullets
 

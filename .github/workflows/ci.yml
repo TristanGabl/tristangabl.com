@@ -30,6 +30,7 @@ jobs:
                 mkdir -p cv/short cv/default
                 typst compile typst/short.typ cv/short/cv_tristan_gabl.pdf
                 typst compile typst/default.typ cv/default/cv_tristan_gabl.pdf
+                cp site/index.html cv/
             - name: deploy
               uses: JamesIves/github-pages-deploy-action@v4
               if: github.ref == 'refs/heads/main'

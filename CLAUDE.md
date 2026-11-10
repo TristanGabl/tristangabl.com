@@ -31,3 +31,7 @@ typst compile default.typ ../default/cv_tristan_gabl.pdf
 - Only claim what the source (repos, reports) supports; flag unverifiable claims (e.g. comparisons or metrics without saved results) instead of writing them.
 - Prefer concrete methods and numbers over generic phrases ("good coding practices").
 - Skills and interests are kept identical across both configuration files.
+
+## Todo
+
+- Apply as co-founder at MSMD Robotics (https://msmdrobotics.com/). Tommi (Tommaso Satti, tommaso.satti@msmdrobotics.com) posted the call; reach out to him there or by email. Startup in the UPortunity programme: automation for construction, transferring human expert skills to specialist models, project with a big industry partner, own robot and lab at IPZ Hangar. Full-time co-founder role; the UPortunity fellowship money can be split.

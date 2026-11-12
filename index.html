@@ -38,8 +38,11 @@
   }
   .contact { font: 0.95rem/1.7 Poppins, system-ui, sans-serif; }
   .contact a { color: var(--fg); }
-  .pdf { margin-top: 10px; font: 0.85rem Poppins, system-ui, sans-serif; color: var(--muted); }
-  .pdf a { color: var(--accent); }
+  .pdf {
+    display: inline-block; margin-top: 14px; padding: 6px 16px; border-radius: 6px;
+    background: var(--accent); color: var(--bg); font: 500 0.9rem Poppins, system-ui, sans-serif;
+  }
+  .pdf:hover { text-decoration: none; opacity: .88; }
   header img { width: 112px; height: 136px; object-fit: cover; border-radius: 8px; flex-shrink: 0; }
   h2 {
     display: flex; align-items: center; gap: 12px; margin: 40px 0 16px;
@@ -91,7 +94,7 @@
       <a href="tel:+41765756457">+41 76 575 64 57</a><br>
       <a href="https://github.com/TristanGabl">github.com/TristanGabl</a>
     </div>
-    <div class="pdf">PDF: <a href="default/cv_tristan_gabl.pdf">full</a> · <a href="short/cv_tristan_gabl.pdf">one page</a></div>
+    <a class="pdf" href="default/cv_tristan_gabl.pdf">PDF</a>
   </div>
   <img src="headshot.jpeg" alt="Tristan Gabl">
 </header>

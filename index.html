@@ -4,36 +4,98 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Tristan Gabl</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
 <style>
-  html, body { margin: 0; background: #525659; }
-  #pages { display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 16px; }
-  canvas { width: 100%; max-width: 900px; height: auto; background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,.4); }
-  #download { color: #fff; font: 16px system-ui, sans-serif; text-align: center; padding: 0 16px 24px; }
-  #download a { color: #fff; }
+  :root {
+    --bg: #fbfaf8; --fg: #1d1d1f; --muted: #5f5f66; --rule: #1d1d1f;
+    --accent: #1f5fa8; --tag-bg: #eceae6;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #151517; --fg: #e9e9ec; --muted: #a1a1aa; --rule: #e9e9ec;
+      --accent: #7fb2ec; --tag-bg: #2a2a2e;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #151517; --fg: #e9e9ec; --muted: #a1a1aa; --rule: #e9e9ec;
+    --accent: #7fb2ec; --tag-bg: #2a2a2e;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; background: var(--bg); color: var(--fg);
+    font: 17px/1.55 "Source Serif 4", Georgia, serif;
+  }
+  main { max-width: 820px; margin: 0 auto; padding: 48px 16px 64px; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  header { display: flex; justify-content: space-between; align-items: center; gap: 24px; }
+  header h1 {
+    font: 500 2.1rem/1.1 Poppins, system-ui, sans-serif; letter-spacing: .02em;
+    text-transform: uppercase; margin: 0 0 12px;
+  }
+  .contact { font: 0.95rem/1.7 Poppins, system-ui, sans-serif; }
+  .contact a { color: var(--fg); }
+  .pdf { margin-top: 10px; font: 0.85rem Poppins, system-ui, sans-serif; color: var(--muted); }
+  .pdf a { color: var(--accent); }
+  header img { width: 112px; height: 136px; object-fit: cover; border-radius: 8px; flex-shrink: 0; }
+  h2 {
+    display: flex; align-items: center; gap: 12px; margin: 40px 0 16px;
+    font: 600 1.15rem Poppins, system-ui, sans-serif; text-transform: uppercase; letter-spacing: .03em;
+  }
+  h2::after { content: ""; flex: 1; border-top: 1px solid var(--rule); }
+  .intro { font-style: italic; color: var(--muted); margin: 0 0 20px; }
+  .entry { margin-bottom: 24px; }
+  .row { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
+  h3 { font-size: 1.05rem; font-weight: 600; margin: 0; }
+  .dates { font-style: italic; color: var(--muted); white-space: nowrap; font-size: .95rem; }
+  .sub { font-style: italic; color: var(--muted); font-size: .95rem; }
+  .degree { margin-top: 6px; }
+  .degree span { font-weight: 600; white-space: nowrap; }
+  ul { margin: 8px 0 0; padding-left: 20px; }
+  li { margin-bottom: 4px; }
+  .courses {
+    columns: 2; column-gap: 24px; list-style: none; padding-left: 16px; font-size: .95rem;
+  }
+  .tag {
+    font: 500 .7rem Poppins, system-ui, sans-serif; background: var(--tag-bg);
+    padding: 2px 7px; border-radius: 4px; vertical-align: 2px; margin-left: 4px;
+  }
+  .skills { display: grid; grid-template-columns: max-content 1fr; gap: 6px 16px; margin: 0; }
+  .skills dt { font-weight: 600; }
+  .skills dd { margin: 0; }
+  @media (max-width: 560px) {
+    main { padding-top: 28px; }
+    header { flex-direction: column-reverse; align-items: flex-start; }
+    header h1 { font-size: 1.7rem; }
+    .row { flex-direction: column; gap: 0; }
+    .courses { columns: 1; }
+    .skills { grid-template-columns: 1fr; gap: 0; }
+    .skills dd { margin-bottom: 8px; }
+  }
+  @media print {
+    .pdf { display: none; }
+    main { padding: 0; }
+  }
 </style>
 </head>
 <body>
-<div id="pages"></div>
-<p id="download"><a href="default/cv_tristan_gabl.pdf">Download CV (PDF)</a></p>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-<script>
-  const url = "default/cv_tristan_gabl.pdf";
-  pdfjsLib.GlobalWorkerOptions.workerSrc =
-    "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
-
-  pdfjsLib.getDocument(url).promise.then(async (pdf) => {
-    const container = document.getElementById("pages");
-    const scale = 2 * (window.devicePixelRatio || 1);
-    for (let n = 1; n <= pdf.numPages; n++) {
-      const page = await pdf.getPage(n);
-      const viewport = page.getViewport({ scale });
-      const canvas = document.createElement("canvas");
-      canvas.width = viewport.width;
-      canvas.height = viewport.height;
-      container.appendChild(canvas);
-      await page.render({ canvasContext: canvas.getContext("2d"), viewport }).promise;
-    }
-  });
-</script>
+<main>
+<header>
+  <div>
+    <h1>Tristan Gabl</h1>
+    <div class="contact">
+      <a href="mailto:trgabl@student.ethz.ch">trgabl@student.ethz.ch</a><br>
+      <a href="tel:+41765756457">+41 76 575 64 57</a><br>
+      <a href="https://github.com/TristanGabl">github.com/TristanGabl</a>
+    </div>
+    <div class="pdf">PDF: <a href="default/cv_tristan_gabl.pdf">full</a> · <a href="short/cv_tristan_gabl.pdf">one page</a></div>
+  </div>
+  <img src="headshot.jpeg" alt="Tristan Gabl">
+</header>
+<section><h2>Education</h2><p class="intro">Computational Science and Engineering at ETH Zürich is a comprehensive interdisciplinary program combining applied mathematics, computer science, and engineering, that can be focused on robotics, machine learning, and numerical methods.</p><article class="entry"><div class="row"><h3><a href="https://rw.ethz.ch/">ETH Zürich</a></h3><span class="dates">2025 – present</span></div><div class="sub">Zurich, Switzerland</div><div class="row degree"><strong>Master of Science ETH in Computational Science and Engineering</strong><span>GPA 5.35/6 (current)</span></div><ul class="courses"><li>Robot Dynamics</li><li>Robot Learning</li><li>Probabilistic Artificial Intelligence</li><li>Advanced Numerical Methods</li><li>Recursive Estimation</li><li>Model Predictive Control</li><li>Large-Scale AI Engineering</li></ul></article><article class="entry"><div class="row"><h3><a href="https://rw.ethz.ch/">ETH Zürich</a></h3><span class="dates">2021 – 2025</span></div><div class="sub">Zurich, Switzerland</div><div class="row degree"><strong>Bachelor of Science ETH in Computational Science and Engineering</strong><span>GPA 5.01/6</span></div><ul class="courses"><li>Computer Vision</li><li>3D Vision</li></ul></article></section><section><h2>Experience</h2><article class="entry"><div class="row"><h3>Module Lead for Perception, <a href="https://www.amzracing.ch/">AMZ Racing, Driverless</a></h3><span class="dates">2025 – 2026</span></div><div class="sub">Zurich, Switzerland</div><ul><li>Lead the next generation of team members responsible for all perception related subsystems.</li><li>Planned and led weekly meetings for timeline management and to ensure knowledge transfer.</li><li>Ensured coherence of development goals across the perception, estimation, and controls modules.</li></ul></article><article class="entry"><div class="row"><h3>Core Member for Sensor Fusion, Perception, <a href="https://www.amzracing.ch/">AMZ Racing, Driverless</a></h3><span class="dates">2024 – 2025</span></div><div class="sub">Zurich, Switzerland</div><ul><li>Developed bird&#x27;s eye view sensor fusion model (ResNet-style backbone with CenterNet-style detection head), combining LiDAR, camera, and odometry data for landmark detection at high-speed driving (20 m/s) within latency budget, deployed as a ROS2 inference node.</li><li>Built a custom Python dataset pipeline extracting past-season rosbags and transforming globally recorded data into the new car&#x27;s local sensor frames for training, with data augmentations for model robustness.</li><li>Improved and maintained performance of baseline detection methods (LiDAR only, camera only) across incoming software and hardware changes of other modules and the car.</li><li>Profiled and optimised the inference pipeline to stay within the 50 ms latency constraint, and maintained a clean, modular, well-documented codebase for efficient knowledge transfer.</li></ul></article><article class="entry"><div class="row"><h3>Research Assistant at <a href="https://cvg.ethz.ch/">Computer Vision and Geometry Group, ETH Zürich</a></h3><span class="dates">2026</span></div><div class="sub">Zurich, Switzerland</div><ul><li>Collecting and pre-processing camera, Aria glasses and LiDAR data for a computer vision research project about human interactions in a kitchen setting.</li></ul></article><article class="entry"><div class="row"><h3>Teaching Assistant at <a href="https://ethz.ch/">ETH Zürich</a></h3><span class="dates">2023 – present</span></div><div class="sub">Zurich, Switzerland</div><ul><li>Teaching assistant for Computer Science 1 &amp; 2 across several semesters.</li></ul></article><article class="entry"><div class="row"><h3>Paramedic at Red Cross at <a href="https://www.roteskreuz.at/">Civil Service</a></h3><span class="dates">2020 – 2021</span></div><div class="sub">Austria</div><ul><li>Gained experience in taking responsibility in critical situations.</li></ul></article></section><section><h2>Projects</h2><article class="entry"><div class="row"><h3>Cloth folding using a diffusion policy on a SO-101 <a class="tag" href="https://github.com/TristanGabl/lerobot_robot_learning">github</a></h3></div><div class="sub">Robot Learning</div><ul><li>Established a data collection workflow for imitation learning, used to train and verify diffusion policies.</li><li>Refactored the codebase to add support for Meta&#x27;s DINOv3 vision backbone and a lighter flow matching model without the text encoder, matching or outperforming the CNN-based diffusion policy with 1/5 of the parameters and enabling rollouts on a standard M1 Mac.</li><li>Generalised the policy to arbitrary towel colours by segmenting the towel in every recorded frame with SAM 2 and adding a colour-changing data transform to LeRobot, combined with a dataset of varied offsets and rotations.</li></ul></article><article class="entry"><div class="row"><h3>CuSSS: Cuda implementation of SSS variants <a class="tag" href="https://github.com/ucinereo/CuSSS">github</a></h3></div><div class="sub">Large-Scale AI Engineering — Awarded a letter of distinction</div><ul><li>Implemented native Cuda kernels for variants of SSS activation functions, focused on runtime.</li><li>Validated kernels against PyTorch autograd equivalents and verified speedups using benchmarks and Nsight Systems profiling.</li></ul></article><article class="entry"><div class="row"><h3>Action recognition using 3D hand-object contact maps <a class="tag" href="https://github.com/TristanGabl/3d_vision">github</a></h3></div><div class="sub">3D Vision</div><ul><li>Predicted performed actions from short sequences of hand and object vertices on the egocentric H2O dataset.</li><li>Compared two-stage and end-to-end training of MLP and transformer models, using thresholded contact and distance maps as an intermediate representation.</li></ul></article><article class="entry"><div class="row"><h3>Software pipeline for 3D scene graphs <a class="tag" href="https://github.com/TristanGabl/3dscenegraph_demo">github</a></h3></div><div class="sub">Bachelor&#x27;s thesis</div><ul><li>Developed code for combining point clouds, 2D panoptic segmentation, and MLP output to produce 3D scene graphs.</li><li>Separated object instances on the mesh using connectivity, best-view re-projection of Mask2Former instances for duplicate removal, and BFS assignment of leftover vertices; evaluated with semantic and instance mIoU on ScanNet scenes.</li><li>Compiled a relationship dataset from 3RScan/3DSSG and trained an embedding-based MLP to predict relations between objects; results shown in an interactive Plotly viewer.</li></ul></article></section><section><h2>Skills</h2><dl class="skills"><dt>Languages</dt><dd>English · German</dd><dt>Technologies</dt><dd>C · C++ · Python · PyTorch · ROS2 · Cuda · Julia · MATLAB · JavaScript · Git · Linux · Final Cut Pro</dd><dt>Interests</dt><dd>Robot learning · Autonomous systems · Hardware involved projects</dd></dl></section>
+</main>
 </body>
 </html>

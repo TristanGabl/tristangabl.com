@@ -135,18 +135,18 @@ TEMPLATE = """<!doctype html>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
 <style>
   :root {{
-    --bg: #fbfaf8; --fg: #1d1d1f; --muted: #5f5f66; --rule: #1d1d1f;
-    --accent: #1f5fa8; --tag-bg: #eceae6;
+    --bg: #ffffff; --fg: #1a1a1a; --muted: #5c5c5c; --rule: #1a1a1a;
+    --accent: #1f5fa8; --tag-bg: #eeeeee;
   }}
   @media (prefers-color-scheme: dark) {{
     :root:not([data-theme="light"]) {{
-      --bg: #151517; --fg: #e9e9ec; --muted: #a1a1aa; --rule: #e9e9ec;
-      --accent: #7fb2ec; --tag-bg: #2a2a2e;
+      --bg: #121212; --fg: #e8e8e8; --muted: #a0a0a0; --rule: #e8e8e8;
+      --accent: #7fb2ec; --tag-bg: #2a2a2a;
     }}
   }}
   :root[data-theme="dark"] {{
-    --bg: #151517; --fg: #e9e9ec; --muted: #a1a1aa; --rule: #e9e9ec;
-    --accent: #7fb2ec; --tag-bg: #2a2a2e;
+    --bg: #121212; --fg: #e8e8e8; --muted: #a0a0a0; --rule: #e8e8e8;
+    --accent: #7fb2ec; --tag-bg: #2a2a2a;
   }}
   * {{ box-sizing: border-box; }}
   html {{ -webkit-text-size-adjust: 100%; }}

@@ -6,6 +6,7 @@ Tristan Gabl's CV in Typst, in two variants. Content lives in YAML, layout in `.
 |---|---|---|---|
 | short (one page, two columns) | `typst/short.typ` | `typst/configuration_short.yml` | `short/cv_tristan_gabl.pdf` |
 | default (detailed, multi-page) | `typst/default.typ` | `typst/configuration_default.yml` | `default/cv_tristan_gabl.pdf` |
+| HTML (site main page) | `site/build_html.py` | `typst/configuration_default.yml` | `index.html` (CI only) |
 
 Shared font sizes: `typst/settings.yml`. Headshot: `typst/images/headshot.jpeg`.
 
@@ -24,7 +25,8 @@ typst compile default.typ ../default/cv_tristan_gabl.pdf
 ## Deploy
 
 `.github/workflows` builds both variants on push and deploys to GitHub Pages (`gh-pages`) as
-`short/cv_tristan_gabl.pdf` and `default/cv_tristan_gabl.pdf`. `site/index.html` (embeds the default CV) and `site/CNAME` (custom domain `tristangabl.com`) are copied to the site root. Commits go directly to `main`.
+`short/cv_tristan_gabl.pdf` and `default/cv_tristan_gabl.pdf`. CI also runs `python3 site/build_html.py cv`, which renders the default YAML as `index.html` (the site's main page, Tristan's choice "for now") plus the headshot. `site/pdf.html` (PDF.js view of the default PDF) and `site/CNAME` (custom domain `tristangabl.com`) are copied to the site root.
+- When a YAML field is added or renamed, update `site/build_html.py` too, so the HTML CV keeps matching the PDF. Test locally: `python3 site/build_html.py <scratch dir>`. Commits go directly to `main`.
 
 ## Writing CV bullets
 

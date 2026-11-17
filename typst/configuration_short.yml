@@ -57,6 +57,15 @@ project_links:
 
 
 jobs:
+    - position: Member, Humanoid Robotics
+      company:
+          name: ETH Robotics Club
+          link: https://ethrobotics.ch/
+      description: Teleoperation, retargeting and RL training for humanoids.
+      from: '2026'
+      to: '_'
+      location: CH
+
     - position: Research Assistant
       company:
           name: Computer Vision and Geometry Group ETH Zürich

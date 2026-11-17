@@ -21,6 +21,7 @@ typst compile default.typ ../default/cv_tristan_gabl.pdf
 
 - The short CV must stay one page: check with `pdfinfo ../short/cv_tristan_gabl.pdf | grep Pages`.
 - "unknown font family: poppins" is expected locally (Poppins not installed); CI installs it from `fonts/`.
+- Pass `--font-path ../fonts` to use Poppins locally. On the Pi, typst is the release binary in `~/.local/bin`, and `pdfinfo` is missing: count pages with `python3 -c "import re;print(len(re.findall(rb'/Type\\s*/Page[^s]',open('../short/cv_tristan_gabl.pdf','rb').read())))"`.
 
 ## Deploy
 

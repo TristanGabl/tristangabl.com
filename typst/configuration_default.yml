@@ -46,6 +46,15 @@ education:
       points: []
 
 experience:
+    - position: 'Member, Humanoid Robotics'
+      organization: 'ETH Robotics Club'
+      link: 'https://ethrobotics.ch/'
+      location: 'Zurich, Switzerland'
+      from: '2026'
+      to: ''
+      points:
+          - 'Working on teleoperation, motion retargeting and reinforcement learning training for the club humanoid.'
+
     - position: 'Research Assistant'
       organization: 'Computer Vision and Geometry Group, ETH Zürich'
       link: 'https://cvg.ethz.ch/'

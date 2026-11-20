@@ -61,7 +61,7 @@ jobs:
       company:
           name: ETH Robotics Club
           link: https://ethrobotics.ch/
-      description: Teleoperation, retargeting and RL training for humanoids.
+      description: Teleoperation, retargeting and RL for the club humanoid.
       from: '2026'
       to: '_'
       location: CH

@@ -53,7 +53,7 @@ experience:
       from: '2026'
       to: ''
       points:
-          - 'Working on teleoperation, motion retargeting and reinforcement learning training for the club humanoid.'
+          - 'Working on teleoperation, motion retargeting and reinforcement learning for the club humanoid.'
 
     - position: 'Research Assistant'
       organization: 'Computer Vision and Geometry Group, ETH Zürich'

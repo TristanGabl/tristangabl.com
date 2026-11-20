@@ -34,4 +34,5 @@ typst compile default.typ ../default/cv_tristan_gabl.pdf
 - Only claim what the source (repos, reports) supports; flag unverifiable claims (e.g. comparisons or metrics without saved results) instead of writing them.
 - Prefer concrete methods and numbers over generic phrases ("good coding practices").
 - Skills and interests are kept identical across both configuration files.
+- Every content change (new entry, edit, removal) goes into both `configuration_default.yml` and `configuration_short.yml` in the same commit, shortened for the short CV (Tristan's rule). The HTML site follows the default YAML by itself. Rebuild both PDFs and check with `pdftotext` that the change shows in each.
 
